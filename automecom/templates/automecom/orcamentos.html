@@ -73,8 +73,10 @@
                     <p><strong>Veículo:</strong> {{ orcamento.veiculo.marca }} {{ orcamento.veiculo.modelo }} ({{ orcamento.veiculo.matricula }})</p>
                     <p><strong>Serviços:</strong></p>
                         {% for servico in orcamento.servicos.all %}
-                            <li>{{ servico.nome }}</li>
+                            <p>{{ servico.nome }}</p><br>
                         {% endfor %}
+                    <p><strong> Data:</strong> {{ orcamento.data_criacao|date:"d/m/Y H:i" }}<p></p>
+                    <br>
 
                     {% if orcamento.arquivo_pdf %}
     <p><strong>Orçamento em PDF:</strong>

@@ -72,13 +72,15 @@ def pedido_orcamento(request):
 
                 try:
                     utilizador_perfil = Utilizador.objects.get(user=request.user)
-                    orcamento.telefone = utilizador_perfil.telefone
+                    if utilizador_perfil.telefone:
+                        orcamento.telefone = utilizador_perfil.telefone
+                    else:
+                        orcamento.telefone = form.cleaned_data.get('telefone')
                 except Utilizador.DoesNotExist:
-
-                    pass
-                except AttributeError:
-                    # Lide com o caso se utilizador_perfil não tiver o atributo telefone
-                    pass
+                    orcamento.telefone = form.cleaned_data.get('telefone')
+            else:
+                # utilizador não autenticado
+                orcamento.telefone = form.cleaned_data.get('telefone')
 
             orcamento.save()
             form.save_m2m() # Salva as relações ManyToMany (ex: Servicos)
@@ -381,7 +383,7 @@ def register_view(request):
             utilizador = Utilizador()
             utilizador.nome = user.username
             utilizador.user = user
-            user.telefone = form.cleaned_data['telefone']
+            utilizador.telefone = form.cleaned_data['telefone']
 
             user.save()
             utilizador.save()

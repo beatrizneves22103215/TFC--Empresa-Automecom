@@ -2,22 +2,30 @@
 
 {% block main %}
 {% load static %}
+<style>
+    /* Prevent the empty .conteudo wrapper from adding whitespace at the top */
+    main > .conteudo:first-child {
+        padding: 0;
+        margin: 0;
+        height: 0;
+        overflow: hidden;
+    }
+</style>
+</div>
 
-
-<div class="containerHome">
-    <div class="introducao">
-        <div class="texto-introducao">
-            <h2>Oficina Auto Mecom</h2>
-            <p>Bem-vindo(a) ao nosso website! Estamos felizes por tê-lo aqui. Navegue pelas nossas páginas e descubra todos os produtos e serviços que temos a oferecer.</p>
-            <a href="marcacao" class="botao">Marcação</a>
-             <a href="orcamento" class="botao">Pedir orçamento</a>
-
+<div class="hero-section" style="background-image: url('{% static 'automecom/images/homepage.jpg' %}');">
+    <div class="hero-section-overlay"></div>
+    <div class="hero-content">
+        <h2> Auto Mecom</h2>
+        <p>Manutenção e reparação<br>automóvel com confiança e rapidez</p>
+        <div class="hero-buttons">
+            <a href="marcacao" class="btn-primary"><i class="fa fa-calendar"></i> Marcar Serviço</a>
+            <a href="orcamento" class="btn-secondary"><i class="fa fa-envelope" aria-hidden="true"></i> Pedir Orçamento</a>
         </div>
     </div>
-    <div class="imagem-introducao">
-            <img src="{% static 'automecom/images/dashboard.jpg' %}" alt="Imagem da oficina">
-        </div>
 </div>
+
+<div class="conteudo">
 
 
 <div class="slideshow-container">

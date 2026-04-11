@@ -3,6 +3,7 @@
 
 
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <title>Auto Mecom </title>
@@ -10,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'automecom/css/estilos.css' %}">
-
+    <link rel="icon" href="{% static 'automecom/images/LOGOPNG.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'automecom/images/LOGOPNG.png' %}">
 
     {% block styles %}
 
@@ -21,114 +23,86 @@
 
 
 <body>
-  <header>
-      <nav class="logo"><a class="textmenu" href="home">AUTO MECOM</a></nav>
-      <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-label="Abrir menu">
-       <label for="menu-toggle" class="menu-toggle-label">
-          <i class="fa fa-bars"></i>
+    <header>
+        <nav class="logo"><a class="textmenu" href="home"><img
+                    src="{% static 'automecom/images/logo_white_final.png' %}" alt="Auto Mecom" class="logo-img"
+                    style="height: 80px; width: auto; object-fit: contain;"></a></nav>
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox" aria-label="Abrir menu">
+        <label for="menu-toggle" class="menu-toggle-label">
+            <i class="fa fa-bars"></i>
         </label>
 
 
-      <nav class="textmenu menu-links">
-        <a href="sobre">OFICINA</a>
-<!--
+        <nav class="textmenu menu-links">
+            <a href="sobre">SOBRE</a>
+            <a href="servicos">SERVIÇOS</a>
 
-        <div class="subnav">
-            <a class="subnavbtn" href="servicos">SERVIÇOS <i class="fa fa-caret-down"></i></a>
-            <div class="subnav-content">
-        {% for servico in servicos %}
-            <a href="#{{ servico.id }}">{{ servico.nome }}</a>
-        {% endfor %}
-            </div>
-        </div>
+            <a href="conselhos">CONSELHOS</a>
+            <a href="contactos">CONTACTOS</a>
+            <a href="marcacao">MARCAÇÃO</a>
 
--->
-
-        <div class="subnav">
-            <a class="subnavbtn" href="servicos">SERVIÇOS <i class="fa fa-caret-down"></i></a>
-            <div class="subnav-content">
-                <a href="servicos#servico-4">Inspeção Automóvel</a>
-                <a href="servicos#servico-5">Ar Condicionado Auto</a>
-                <a href="servicos#servico-6">Placas de Matrícula</a>
-                <a href="servicos#servico-7">Pneus</a>
-                <a href="servicos#servico-8">Revisão Automóvel</a>
-                <a href="servicos#servico-9">Travões</a>
-                <a href="servicos#servico-10">Lâmpadas Auto</a>
-                <a href="servicos#servico-11">Baterias Auto</a>
-                <a href="servicos#servico-12">Alternador</a>
-                <a href="servicos#servico-13">Embraiagem</a>
-                <a href="servicos#servico-14">Amortecedoreso</a>
-                <a href="servicos#servico-15">Correia de Distribuição</a>
-                <a href="servicos#servico-16">Escapes</a>
-                <a href="servicos#servico-17">Mudança de Óleo</a>
-                <a href="servicos#servico-18">Diagnóstico</a>
-            </div>
-        </div>
-
-        <a href="conselhos">CONSELHOS</a>
-        <a href="contactos">CONTACTOS</a>
-        <a href="marcacao">MARCAÇÃO</a>
-
-        {% if not request.user.is_authenticated %}
-                <a href="{% url 'automecom:login' %}">A MINHA CONTA</a>
-        {% endif %}
-        <div class="subnav">
-        {% if request.user.is_authenticated %}
-            <a class="subnavbtn">{{ user.username }}<i class="fa fa-caret-down"></i></a>
+            {% if not request.user.is_authenticated %}
+            <a href="{% url 'automecom:login' %}">A MINHA CONTA</a>
+            {% endif %}
+            <div class="subnav">
+                {% if request.user.is_authenticated %}
+                <a class="subnavbtn">{{ user.username }}<i class="fa fa-caret-down"></i></a>
                 <div class="subnav-content">
                     <a href="perfil">Perfil</a>
                     {% if user|is_administrador %}
-                        <a href="marcacoes">Lista de marcações</a>
-                        {% else %}
-                        <a href="marcacoes">Marcações</a>
+                    <a href="marcacoes">Lista de marcações</a>
+                    {% else %}
+                    <a href="marcacoes">Marcações</a>
                     {% endif %}
                     {% if user|is_administrador %}
-                        <a href="orcamentos">Orçamentos</a>
-                        {% else %}
-                            <a href="orcamentos">Pedidos de orçamentos</a>
+                    <a href="orcamentos">Orçamentos</a>
+                    {% else %}
+                    <a href="orcamentos">Pedidos de orçamentos</a>
                     {% endif %}
                     <a href="obras.html">Obras Realizadas</a>-->
                     <a href="logout">Terminar sessão</a>
                 </div>
-        {% endif %}
+                {% endif %}
 
+            </div>
+        </nav>
+    </header>
+    <div class="espace"></div>
+
+    <main>
+        <div class="conteudo">
+            {% block main %}
+            {% endblock main %}
         </div>
-    </nav>
-  </header>
-  <div class="espace"></div>
 
-  <main>
-  <div class="conteudo">
-      {% block main %}
-      {% endblock main %}
-  </div>
+        <footer>
+            <div class="creditos">
+                <div class="container">
+                    <div class="leftsubmenu">
+                        <div>
+                            <ul class="sub-menu">
+                                <p>2024 © AutoMecom</p>
+                                <br>
+                                <li><a href="privacidade.html">Política de Privacidade</a></li>
 
-    <footer>
-      <div class="creditos">
-          <div class="container">
-              <div class="leftsubmenu">
-                  <div>
-                      <ul class="sub-menu">
-                          <p>2024 © AutoMecom</p>
-                          <br>
-                            <li><a href="privacidade.html">Política de Privacidade</a></li>
-
-                            <li><a href="garantia.html">Regulamento da Garantia na Manutenção Auto</a></li>
-                      </ul>
-                  </div>
-              </div>
-              <div class="rightsubmenu">
-                  <p>Siga-nos em:</p>
-                  <div class="social">
-                      <a><a href="//www.instagram.com/automecom/" target="_blank"><i class="fa fa-instagram" style="font-size:25px;"></i></a></a>
-                      <a><a href="" target="_blank"><i class="fa fa-facebook" style="font-size:25px;"></i></a></a>
-                      <a><a href="" target="_blank"><i class="fa fa-linkedin" style="font-size:25px;"></i></a></a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
-  </main>
+                                <li><a href="garantia.html">Regulamento da Garantia na Manutenção Auto</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="rightsubmenu">
+                        <p>Siga-nos em:</p>
+                        <div class="social">
+                            <a><a href="//www.instagram.com/automecom/" target="_blank"><i class="fa fa-instagram"
+                                        style="font-size:25px;"></i></a></a>
+                            <a><a href="" target="_blank"><i class="fa fa-facebook" style="font-size:25px;"></i></a></a>
+                            <a><a href="" target="_blank"><i class="fa fa-linkedin" style="font-size:25px;"></i></a></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
 
 </body>
+
 </html>

@@ -44,6 +44,7 @@ class Veiculo(models.Model):
 class Utilizador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     administrador = models.BooleanField(default=False)
+    telefone = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -86,11 +87,12 @@ class Orcamento(models.Model):
     nome = models.CharField(max_length=100, null=True, blank=True)
     apelido = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    telefone = models.IntegerField(null=True, blank=True)
+    telefone = models.CharField(max_length=20, null=True, blank=True)
     descricao = models.TextField()
     servicos = models.ManyToManyField(Servico)
     veiculo = models.OneToOneField(Veiculo, on_delete=models.CASCADE, null=True, blank=True)
     arquivo_pdf = models.FileField(null=True, blank=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
 
 class Obra(models.Model):
 
